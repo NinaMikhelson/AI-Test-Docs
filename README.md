@@ -1,20 +1,19 @@
 # Large Language Model Gateway
 ## Overview
 
-This application is a gateway for DCS applications to make use of modern AI models and techniques. It bridges Visual Basic 6 (VB6) with LLM APIs (OpenAI, Anthropic, Google, etc), enabling existing VB6 applications to benefit from modern AI capabilities.
+This application (Model Gateway) is a middleware written in Java for DCS applications to make use of modern AI models and techniques. It bridges Visual Basic 6 (VB6) with LLM APIs (OpenAI, Anthropic, Google, etc), enabling existing VB6 applications to benefit from modern AI capabilities.
 
-While VB6 is capable of making basic HTTP requests, it lacks comprehensive support for modern HTTPS communication and is not likely to receive native clients to work with modern AI. Java provides a balance of being a common language and providing high enough performance. This middleware acts as a translator between VB6 and modern AI APIs.
+While VB6 is capable of making basic HTTP requests, it lacks comprehensive support for modern HTTPS communication and is not likely to receive native clients to work with modern AI. Java provides a balance of being a common language and providing high enough performance. This middleware acts as a conduit between VB6 and modern AI APIs.
 
 ## Features
 - Accepts requests from VB6 applications via HTTP.
-- Formulates the appropriate prompts to effectively use AI APIs (e.g., GPT-4, claude-3-7-sonnet, Google Vertex AI).
-  - pass-through is also possible
+- Formulates the appropriate prompts to effectively use AI APIs (e.g., GPT-4, Claude 3.7 Sonnet, Google Vertex AI). Pass-through is also possible.
 - Returns OpenAI's response in a variety of friendly formats (for VB6).
 - Basic input validation and error handling.
 - Lightweight and easy to deploy.
 - Tracks and records usage and cost.
 - Stores prompts and replies for audit and debugging purposes.
-- Can be used to screen for sensitive information and prevent accidental data leaks
+- Can be used to screen for sensitive information and prevent accidental data leaks.
 
 ## Architecture
 
@@ -27,7 +26,7 @@ Can be deployed:
 - as a centralized multi-tenant application shared by many hosts
 - a docker sidecar (if running in Kubernetes or similar)
 
-The application starts an HTTP server listening on port 8080 (or otherwise, as specified in config)
+The application starts an HTTP server listening on port 8080 (specified in config)
 
 ## API Specification
 Parse date and amount from check image:
@@ -54,10 +53,11 @@ Response:
 
 ## Development
 ### Environment
-- download java 21
-- download maven
-- download git
-- intall cursor plugins
+- Download:
+  - java 21
+  - maven
+  - git
+- Intall cursor plugins:
   - java
   - maven
   - git
@@ -94,11 +94,11 @@ For production use:
 The following is a description of the steps taken to write this application making maximal use of AI for application development as well as the implementation:
 - prompt cursor for a web application which parses date and amount from a check image
 - cursor provided a working Spring Boot API with an endpoint which accepts an image
-- the image processing was done using the open source OCR library [tesseract](https://github.com/tesseract-ocr/tesseract)
-- this is worth exploring int he future, but we decided to pivot to modern LLMs 
+- the image processing was done using the open source OCR library [Tesseract-OCR](https://github.com/tesseract-ocr/tesseract)
+- this is worth exploring in the future, but we decided to pivot to modern LLMs 
 - we asked the agent for other options and it implemented an Open AI API call
 - the agent provided instructions to test the API from the command line using curl
-- we asked for a swagger UI to make testing quicker and easier
+- we asked for a Swagger UI to make testing quicker and easier
 - tried a few check images (attached below) with non-trivial issues - all were successful!
 - AI was then used to write this document
 
@@ -115,7 +115,7 @@ The following is a description of the steps taken to write this application maki
 - Test against large number of checks with different models and collect metrics
 - Decide on tradeoffs in terms of speed, cost, correctness
 - Add more remote models
-- Try deploying a model locally (llama or otherwise)
+- Try deploying a model locally (Llama or otherwise)
 
 ## Decisions
 - Deployment model (local, remote)
